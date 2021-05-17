@@ -53,7 +53,7 @@ fetch("dino.json")
 // On button click, prepare and display infographic
 document.getElementById("btn").addEventListener("click", function(){
     const human = getHuman();
-    console.log(dinos);
+    document.getElementById("dino-compare").style.display = "none";
 });
 function getInputValue(elementId) {
     return document.getElementById(elementId).value;
