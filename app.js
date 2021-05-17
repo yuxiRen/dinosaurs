@@ -70,9 +70,42 @@ document.getElementById("btn").addEventListener("click", function(){
         dino.compareNameAndAddFact(human.name);
         dino.compareWeightAndAddFact(human.weight);
     });
-
     document.getElementById("dino-compare").style.display = "none";
+    for (let idx in dinos) {
+        let dino = dinos[idx];
+        let fact = dino.getRandomFact();
+        if (dino.weight < 1) {
+            fact = "All birds are dinosaurs."
+        }
+        let gridItemDiv = getGridItem(dino.species, dino.image, fact);
+        document.getElementById("grid").appendChild(gridItemDiv);
+
+    }
 });
 function getInputValue(elementId) {
     return document.getElementById(elementId).value;
+}
+function getGridItem(species, imageUrl, fact) {
+    let gridItemDiv = document.createElement("div");
+    gridItemDiv.className = "grid-item";
+
+    // add species
+    let speciesDiv = document.createElement("h3");
+    speciesDiv.innerText = species;
+    gridItemDiv.appendChild(speciesDiv);
+
+    // add image
+    let imageDiv = document.createElement("img");
+    imageDiv.src = imageUrl;
+    gridItemDiv.appendChild(imageDiv);
+
+    // add fact
+    if (fact) {
+        // for humans, facts are not necessary
+        let factFiv = document.createElement("p");
+        factFiv.innerText = fact;
+        gridItemDiv.appendChild(factFiv);
+    }
+
+    return gridItemDiv;
 }
