@@ -45,11 +45,15 @@ function getHuman() {
 
     // Remove form from screen
 
+let dinos = [];
+fetch("dino.json")
+    .then(response => response.json())
+    .then(data => dinos = data.Dinos.map(dino => new Dino(dino.species, dino.weight, dino.height, [dino.fact, `My species is ${dino.species}.`, `I belong to ${dino.where}.`, `My when value is ${dino.when}.`])))
 
 // On button click, prepare and display infographic
 document.getElementById("btn").addEventListener("click", function(){
     const human = getHuman();
-    console.log(human);
+    console.log(dinos);
 });
 function getInputValue(elementId) {
     return document.getElementById(elementId).value;
