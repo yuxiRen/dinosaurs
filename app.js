@@ -10,10 +10,6 @@ Dino.prototype.addFact = function (fact) {
     this.facts.push(fact);
 };
 
-    // Create Dino Objects
-//let dino = new Dino();
-
-    // Create Human Object
 
 // Use IIFE to get human data from form
 function getHuman() {
@@ -26,24 +22,40 @@ function getHuman() {
         return new Dino('human', weight, heightFeet * 12 + heightInches);
     })();
 }
+Dino.prototype.compareNameAndAddFact = function (name) {
+    let fact = "Our names are on equal position.";
+    if (this.name > name) {
+        fact = "My name comes first in dictionary.";
+    } else if (this.name < name) {
+        fact = "Your name comes first.";
+    }
+    this.addFact(fact);
+};
 
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
+Dino.prototype.compareWeightAndAddFact = function (weight) {
+    let fact = "Our weights are same.";
+    if (this.weight > weight) {
+        fact = "Yay! i weight more :P.";
+    } else if (this.weight < weight) {
+        fact = "You are Fat :P.";
+    }
+    this.addFact(fact);
+};
 
-    
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+Dino.prototype.compareHeightAndAddFact = function (height) {
+    let fact = "Our heights are equal.";
+    if (this.height > height) {
+        fact = "My hight is greater then yours.";
+    } else if (this.height < height) {
+        fact = "You are really tall bro.";
+    }
+    this.addFact(fact);
+};
 
-    
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-
-
-    // Generate Tiles for each Dino in Array
-  
-        // Add tiles to DOM
-
-    // Remove form from screen
+Dino.prototype.getRandomFact = function () {
+    let index = Math.floor(Math.random() * 10) % this.facts.length;
+    return this.facts[index];
+};
 
 let dinos = [];
 fetch("dino.json")
@@ -53,6 +65,12 @@ fetch("dino.json")
 // On button click, prepare and display infographic
 document.getElementById("btn").addEventListener("click", function(){
     const human = getHuman();
+    dinos.forEach(dino => {
+        dino.compareHeightAndAddFact(human.height);
+        dino.compareNameAndAddFact(human.name);
+        dino.compareWeightAndAddFact(human.weight);
+    });
+
     document.getElementById("dino-compare").style.display = "none";
 });
 function getInputValue(elementId) {
