@@ -79,7 +79,10 @@ document.getElementById("btn").addEventListener("click", function(){
         }
         let gridItemDiv = getGridItem(dino.species, dino.image, fact);
         document.getElementById("grid").appendChild(gridItemDiv);
-
+        if (idx == 3) {
+            let humanTileDiv = getGridItem(human.species, human.image);
+            document.getElementById("grid").appendChild(humanTileDiv);
+        }
     }
 });
 function getInputValue(elementId) {
